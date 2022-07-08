@@ -4,16 +4,17 @@ import { DebounceInput } from "react-debounce-input";
 import "./exchangeApp.scss";
 
 const ExchangeApp = () => {
+
   const [currencies, setCurrencies] = useState([]);
   const [loadingStatus, setLoadingStatus] = useState("idle");
   const [singleCurrency, setSingleCurrency] = useState("");
-  const [mainValue, setMainValue] = useState({ input: 0, select: "" });
+  const [mainValue, setMainValue] = useState({ value: 0, select: "" });
   const [secondaryValue, setSecondaryValue] = useState({
-    input: 0,
+    value: 0,
     select: "",
   });
 
-  //Fetch currencies
+  //Fetching currencies/////////////////////////////////////////////////
 
   useEffect(() => {
     setLoadingStatus("loading");
@@ -36,11 +37,10 @@ const ExchangeApp = () => {
       .then(() => setLoadingStatus("idle"));
   }, []);
 
-  //create variables
+  //creating variables////////////////////////////////////////////////
 
   const currenciesOptions = currencies.map((item) => {
     return <option value={item.cc}>{item.cc}</option>;
-    // return item.cc;
   });
   const mainCurrencyName =
     mainValue.select.length > 0
@@ -77,9 +77,10 @@ const ExchangeApp = () => {
         })[0].rate
       : "";
   const actualTime = currencies.length > 0 ? currencies[1].exchangedate : "";
-  //create converter functions
 
-  const onMainCurrencyChanged = (input, select) => {
+  //creating converter functions/////////////////////
+
+  const onMainCurrencyChanged = (value, select) => {
     const mainCurrencyRate = currencies.filter((item) => {
       if (item.cc === select) {
         return item;
@@ -96,17 +97,17 @@ const ExchangeApp = () => {
         : null;
 
     setMainValue({
-      input: input,
+      value: value,
       select: select,
     });
 
     setSecondaryValue({
-      input: ((input * mainCurrencyRate) / secondaryCurrencyRate).toFixed(3),
+      value: ((value * mainCurrencyRate) / secondaryCurrencyRate).toFixed(3),
       select: secondaryValue.select,
     });
   };
 
-  const onSecondaryCurrencyChanged = (input, select) => {
+  const onSecondaryCurrencyChanged = (value, select) => {
     const secondaryCurrencyRate = currencies.filter((item) => {
       if (item.cc === select) {
         return item;
@@ -124,35 +125,33 @@ const ExchangeApp = () => {
     const changeSecondaryValue = () => {
       if (select !== secondaryValue.select) {
         return (
-          (mainValue.input * mainCurrencyRate) /
+          (mainValue.value * mainCurrencyRate) /
           secondaryCurrencyRate
         ).toFixed(3);
       } else {
-        return input;
+        return value;
       }
     };
     setSecondaryValue({
-      // input: (
-      //   (mainValue.input * mainCurrencyRate) /
-      //   secondaryCurrencyRate
-      // ).toFixed(3),
-      input: changeSecondaryValue(),
+      value: changeSecondaryValue(),
       select: select,
     });
     const changeMainValue = () => {
       if (select == secondaryValue.select) {
-        return ((input * secondaryCurrencyRate) / mainCurrencyRate).toFixed(3);
+        return ((value * secondaryCurrencyRate) / mainCurrencyRate).toFixed(3);
       } else {
-        return mainValue.input;
+        return mainValue.value;
       }
     };
     setMainValue({
-      // input:  mainValue.input,
-      input: changeMainValue(),
+      value: changeMainValue(),
       select: mainValue.select,
     });
   };
-  //rendering component
+
+  //rendering component////////////////////////////////////////
+
+
   if (loadingStatus === "loading") {
     return (
       <div className="loading">
@@ -171,11 +170,11 @@ const ExchangeApp = () => {
                 id="mainCurrrency"
                 className="currency-converter__select"
                 onChange={(e) =>
-                  onMainCurrencyChanged(mainValue.input, e.target.value)
+                  onMainCurrencyChanged(mainValue.value, e.target.value)
                 }
               >
                 <option selected disabled>
-                  currencys
+                  currency
                 </option>
                 {currenciesOptions}
               </select>
@@ -188,7 +187,7 @@ const ExchangeApp = () => {
                 type="number"
                 name="number"
                 id="number"
-                value={mainValue.input}
+                value={mainValue.value}
                 min={0}
                 className="currency-converter__input"
                 onChange={(e) =>
@@ -204,7 +203,7 @@ const ExchangeApp = () => {
                 className="currency-converter__select"
                 onChange={(e) =>
                   onSecondaryCurrencyChanged(
-                    secondaryValue.input,
+                    secondaryValue.value,
                     e.target.value
                   )
                 }
@@ -223,7 +222,7 @@ const ExchangeApp = () => {
                 type="number"
                 name="number"
                 id="number"
-                value={secondaryValue.input}
+                value={secondaryValue.value}
                 min={0}
                 className="currency-converter__input"
                 onChange={(e) =>
@@ -252,7 +251,7 @@ const ExchangeApp = () => {
             <p className="result">{singleCurrencyValue} UAH</p>
           </div>
         </div>
-        <div className="asd">curruncies is actual for : {actualTime}</div>
+        <div className="asd">Exchange rates is actual for : {actualTime}</div>
       </div>
     );
   } else
