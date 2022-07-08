@@ -6,6 +6,7 @@
     font-size: 25px;
   }
   &__container {
+    position: relative;
     margin-top: 30px;
     display: flex;
     justify-content: space-around;
@@ -16,9 +17,9 @@
       justify-content: space-around;
       border: 1px solid black;
       border-radius: 5px;
-      .equal-sign{
+      .equal-sign {
         font-size: 50px;
-       margin-top: 90px; 
+        margin-top: 90px;
       }
       &__item {
         display: flex;
@@ -36,11 +37,33 @@
         width: 250px;
         text-align: center;
         font-size: 25px;
+        border: none;
+        outline: none;
+        transition: all 0.5s;
+        &:focus {
+          background-color: #c9c5c561;
+        }
+        &:hover {
+          outline: none;
+          border: none;
+          box-shadow: 3px 3px 5px #72717180;
+        }
       }
       &__input {
         height: 50px;
         width: 245px;
         font-size: 25px;
+        border: none;
+        outline: none;
+        transition: all 0.5s;
+        &:focus {
+          background-color: #c9c5c5;
+        }
+        &:hover {
+          outline: none;
+          border: none;
+          box-shadow: 3px 3px 5px #727171;
+        }
       }
     }
     .single-currency {
@@ -51,15 +74,30 @@
     }
   }
 }
-.loading{
-    position: absolute;
-    top: 30%;
-    left: 45%;
+.loading {
+  position: absolute;
+  top: 30%;
+  left: 45%;
 }
-.error{
-    position: absolute;
-    top: 30%;
-    left: 45%;
-    font-size: 40px;
-    color:red;
+.error {
+  position: absolute;
+  top: 30%;
+  left: 45%;
+  font-size: 40px;
+  color: red;
+}
+.reset {
+  padding: 10px 30px 13px;
+  border: 1px solid black;
+  border-radius: 5px;
+  position: absolute;
+  top: 80%;
+}
+.equals {
+  font-size: 20px;
+  font-weight: 700;
+}
+.result {
+  font-size: 30px;
+  font-weight: 500;
 }
