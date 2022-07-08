@@ -16,6 +16,10 @@
       justify-content: space-around;
       border: 1px solid black;
       border-radius: 5px;
+      .equal-sign{
+        font-size: 50px;
+       margin-top: 90px; 
+      }
       &__item {
         display: flex;
         margin-top: 40px;
@@ -30,6 +34,8 @@
       &__select {
         height: 50px;
         width: 250px;
+        text-align: center;
+        font-size: 25px;
       }
       &__input {
         height: 50px;
@@ -43,4 +49,16 @@
       border-radius: 5px;
     }
   }
+}
+.loading{
+    position: absolute;
+    top: 30%;
+    left: 45%;
+}
+.error{
+    position: absolute;
+    top: 30%;
+    left: 45%;
+    font-size: 40px;
+    color:red;
 }
