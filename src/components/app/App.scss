@@ -1,8 +1,12 @@
-.App {
+.app {
   text-align: center;
   background-color: #999cd587;
   height: 100vh;
   width: 100vw;
+  padding-top: 15px;
+  &__container {
+    margin: 0 auto;
+    width: 1200px;
+    height: 600px;
+  }
 }
-
-

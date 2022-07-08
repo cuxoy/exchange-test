@@ -1,0 +1,20 @@
+.header {
+  background-color: #474747;
+  color: aliceblue;
+  &__container {
+    padding: 5px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    h1 {
+      margin: 0;
+      font-size: 40px;
+      font-weight: 700;
+    }
+    .to-hrivna-rates {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+}

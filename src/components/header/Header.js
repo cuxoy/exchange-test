@@ -1,10 +1,16 @@
+import "./header.scss";
 const Header = () => {
   return (
-    <div className="header">
+    <header className="header">
       <div className="header__container">
-        some text
+        <h1>Currency exchange</h1>
+        <div className="to-hrivna-rates">
+          <div className="one-hrivna">1 UAH = </div>
+          <div className="">USD</div>
+          <div className="">EUR</div>
+        </div>
       </div>
-    </div>
+    </header>
   );
 };
 export default Header;
